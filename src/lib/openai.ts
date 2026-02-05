@@ -16,8 +16,8 @@ const FALLBACK_RESPONSE: EvaluateResponse = {
   feedback: 'Автоматическая оценка недоступна. Сравните свой ответ с эталонным.',
 };
 
-export async function evaluateAnswer(req: EvaluateRequest): Promise<EvaluateResponse> {
-  const apiKey = process.env.OPENAI_API_KEY;
+export async function evaluateAnswer(req: EvaluateRequest, userApiKey?: string): Promise<EvaluateResponse> {
+  const apiKey = userApiKey || process.env.OPENAI_API_KEY;
 
   if (!apiKey) {
     return FALLBACK_RESPONSE;

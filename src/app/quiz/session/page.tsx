@@ -47,7 +47,8 @@ function QuizSession() {
   // Start timer when question becomes active, pause when answered
   useEffect(() => {
     if (session.state === 'active' && questions.length > 0) {
-      timer.reset();
+      const seconds = session.currentQuestion?.type === 'open' ? 180 : 60;
+      timer.reset(seconds);
       timer.start();
     } else if (session.state === 'answered') {
       timer.pause();
@@ -70,6 +71,7 @@ function QuizSession() {
       progress.recordAnswer(q.id, false); // Open questions not auto-scored
       setAiLoading(true);
       try {
+        const apiKey = typeof window !== 'undefined' ? localStorage.getItem('openai-api-key') : null;
         const res = await fetch('/api/evaluate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -77,6 +79,7 @@ function QuizSession() {
             question: q.question,
             userAnswer: text,
             sampleAnswer: q.sampleAnswer,
+            ...(apiKey && { apiKey }),
           }),
         });
         const data = await res.json();
@@ -97,7 +100,7 @@ function QuizSession() {
   if (questions.length === 0) {
     return (
       <main className="max-w-2xl mx-auto px-4 py-8 text-center">
-        <p className="text-gray-600 mb-4">Вопросы не найдены.</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">Вопросы не найдены.</p>
         <Link href="/quiz" className="text-blue-600 hover:underline">Назад к настройкам</Link>
       </main>
     );
@@ -106,9 +109,9 @@ function QuizSession() {
   if (session.state === 'completed') {
     return (
       <main className="max-w-2xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-xl shadow-md p-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Тренировка завершена!</h2>
-          <p className="text-gray-600 mb-2">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Тренировка завершена!</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-2">
             Quiz-вопросы: {session.score.correct} / {session.score.total} правильных
           </p>
           {session.score.total > 0 && (
@@ -125,7 +128,7 @@ function QuizSession() {
             </Link>
             <Link
               href="/"
-              className="px-6 py-2 border border-gray-300 rounded-lg hover:border-blue-400"
+              className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:border-blue-400"
             >
               На главную
             </Link>
@@ -187,9 +190,9 @@ function QuizSession() {
 
 export default function QuizSessionPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Header />
-      <Suspense fallback={<div className="max-w-2xl mx-auto px-4 py-8">Загрузка...</div>}>
+      <Suspense fallback={<div className="max-w-2xl mx-auto px-4 py-8 text-gray-900 dark:text-white">Загрузка...</div>}>
         <QuizSession />
       </Suspense>
     </div>

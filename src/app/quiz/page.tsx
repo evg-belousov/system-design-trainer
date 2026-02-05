@@ -39,20 +39,20 @@ function QuizSetup() {
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-8">Настройка тренировки</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Настройка тренировки</h1>
 
       <div className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Блок</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Блок</label>
           <div className="flex gap-3">
             <button
-              className={`px-4 py-2 rounded-lg border ${block === 'sa' ? 'bg-blue-600 text-white border-blue-600' : 'text-gray-700 border-gray-300 hover:border-blue-400'}`}
+              className={`px-4 py-2 rounded-lg border ${block === 'sa' ? 'bg-blue-600 text-white border-blue-600' : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400'}`}
               onClick={() => { setBlock('sa'); setSelectedTopic('all'); }}
             >
               Системный Анализ
             </button>
             <button
-              className={`px-4 py-2 rounded-lg border ${block === 'sd' ? 'bg-blue-600 text-white border-blue-600' : 'text-gray-700 border-gray-300 hover:border-blue-400'}`}
+              className={`px-4 py-2 rounded-lg border ${block === 'sd' ? 'bg-blue-600 text-white border-blue-600' : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400'}`}
               onClick={() => { setBlock('sd'); setSelectedTopic('all'); }}
             >
               System Design
@@ -61,9 +61,9 @@ function QuizSetup() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Тема</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Тема</label>
           <select
-            className="w-full p-3 border border-gray-300 rounded-lg text-gray-700"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800"
             value={selectedTopic}
             onChange={(e) => setSelectedTopic(e.target.value)}
           >
@@ -75,12 +75,12 @@ function QuizSetup() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Сложность</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Сложность</label>
           <div className="flex gap-3">
             {(['all', 'junior', 'middle', 'senior'] as const).map(d => (
               <button
                 key={d}
-                className={`px-4 py-2 rounded-lg border ${selectedDifficulty === d ? 'bg-blue-600 text-white border-blue-600' : 'text-gray-700 border-gray-300 hover:border-blue-400'}`}
+                className={`px-4 py-2 rounded-lg border ${selectedDifficulty === d ? 'bg-blue-600 text-white border-blue-600' : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400'}`}
                 onClick={() => setSelectedDifficulty(d)}
               >
                 {d === 'all' ? 'Все' : d}
@@ -90,7 +90,7 @@ function QuizSetup() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Количество вопросов (доступно: {availableQuestions.length})
           </label>
           <input
@@ -101,11 +101,11 @@ function QuizSetup() {
             onChange={(e) => setQuestionCount(Number(e.target.value))}
             className="w-full"
           />
-          <span className="text-sm text-gray-500">{Math.min(questionCount, availableQuestions.length)}</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">{Math.min(questionCount, availableQuestions.length)}</span>
         </div>
 
         <button
-          className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium disabled:bg-gray-300"
+          className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium disabled:bg-gray-300 dark:disabled:bg-gray-700"
           onClick={handleStart}
           disabled={availableQuestions.length === 0}
         >
@@ -118,9 +118,9 @@ function QuizSetup() {
 
 export default function QuizPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Header />
-      <Suspense fallback={<div className="max-w-2xl mx-auto px-4 py-8">Загрузка...</div>}>
+      <Suspense fallback={<div className="max-w-2xl mx-auto px-4 py-8 text-gray-900 dark:text-white">Загрузка...</div>}>
         <QuizSetup />
       </Suspense>
     </div>
