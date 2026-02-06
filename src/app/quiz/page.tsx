@@ -57,6 +57,12 @@ function QuizSetup() {
             >
               System Design
             </button>
+            <button
+              className={`px-4 py-2 rounded-lg border ${block === 'ai' ? 'bg-blue-600 text-white border-blue-600' : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400'}`}
+              onClick={() => { setBlock('ai'); setSelectedTopic('all'); }}
+            >
+              AI / ML
+            </button>
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 export type Difficulty = 'junior' | 'middle' | 'senior';
 
-export type Block = 'sa' | 'sd';
+export type Block = 'sa' | 'sd' | 'ai';
 
 export interface BaseQuestion {
   id: string;

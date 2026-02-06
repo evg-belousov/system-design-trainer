@@ -82,7 +82,48 @@ describe('Question types', () => {
   });
 
   it('should restrict Block to valid values', () => {
-    const blocks: Block[] = ['sa', 'sd'];
-    expect(blocks).toHaveLength(2);
+    const blocks: Block[] = ['sa', 'sd', 'ai'];
+    expect(blocks).toHaveLength(3);
+  });
+
+  it('should allow creating a QuizQuestion with block "ai"', () => {
+    const q: QuizQuestion = {
+      id: 'ai-rag-001',
+      block: 'ai',
+      topic: 'rag',
+      topicLabel: 'RAG',
+      difficulty: 'middle',
+      type: 'quiz',
+      question: 'Что такое RAG?',
+      options: [
+        'Retrieval-Augmented Generation',
+        'Random Access Gateway',
+        'Recurrent Attention Graph',
+        'Rapid API Generator',
+      ],
+      correctIndex: 0,
+      explanation: 'RAG — Retrieval-Augmented Generation, паттерн дополнения LLM внешними данными.',
+    };
+
+    expect(q.type).toBe('quiz');
+    expect(q.block).toBe('ai');
+  });
+
+  it('should allow creating an OpenQuestion with block "ai"', () => {
+    const q: OpenQuestion = {
+      id: 'ai-llm-fundamentals-001',
+      block: 'ai',
+      topic: 'llm-fundamentals',
+      topicLabel: 'Основы LLM',
+      difficulty: 'senior',
+      type: 'open',
+      question: 'Объясните принцип RLHF.',
+      sampleAnswer: 'RLHF — обучение с подкреплением на основе обратной связи от людей.',
+      explanation: 'RLHF используется для тонкой настройки LLM на основе предпочтений человека.',
+    };
+
+    expect(q.type).toBe('open');
+    expect(q.block).toBe('ai');
+    expect(q.sampleAnswer).toBeDefined();
   });
 });

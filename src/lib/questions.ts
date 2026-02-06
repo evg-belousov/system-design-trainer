@@ -25,6 +25,19 @@ import { replicationQuestions } from '@/data/sd/replication';
 import { networkingQuestions } from '@/data/sd/networking';
 import { rateLimitingQuestions } from '@/data/sd/rate-limiting';
 
+import { mlFundamentalsQuestions } from '@/data/ai/ml-fundamentals';
+import { neuralNetworksQuestions } from '@/data/ai/neural-networks';
+import { transformersQuestions } from '@/data/ai/transformers';
+import { llmFundamentalsQuestions } from '@/data/ai/llm-fundamentals';
+import { llmInferenceQuestions } from '@/data/ai/llm-inference';
+import { ragQuestions } from '@/data/ai/rag';
+import { agentsQuestions } from '@/data/ai/agents';
+import { promptEngineeringQuestions } from '@/data/ai/prompt-engineering';
+import { vectorDatabasesQuestions } from '@/data/ai/vector-databases';
+import { mlopsQuestions } from '@/data/ai/mlops';
+import { aiSafetyQuestions } from '@/data/ai/ai-safety';
+import { evaluationQuestions } from '@/data/ai/evaluation';
+
 const allQuestions: Question[] = [
   ...modelingQuestions,
   ...architectureQuestions,
@@ -49,6 +62,18 @@ const allQuestions: Question[] = [
   ...replicationQuestions,
   ...networkingQuestions,
   ...rateLimitingQuestions,
+  ...mlFundamentalsQuestions,
+  ...neuralNetworksQuestions,
+  ...transformersQuestions,
+  ...llmFundamentalsQuestions,
+  ...llmInferenceQuestions,
+  ...ragQuestions,
+  ...agentsQuestions,
+  ...promptEngineeringQuestions,
+  ...vectorDatabasesQuestions,
+  ...mlopsQuestions,
+  ...aiSafetyQuestions,
+  ...evaluationQuestions,
 ];
 
 export function getAllQuestions(): Question[] {

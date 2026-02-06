@@ -19,6 +19,23 @@ describe('questions library', () => {
     expect(sd.every(q => q.block === 'sd')).toBe(true);
   });
 
+  it('should filter by block "ai"', () => {
+    const ai = getQuestionsByBlock('ai');
+    expect(ai.length).toBeGreaterThan(0);
+    expect(ai.every(q => q.block === 'ai')).toBe(true);
+  });
+
+  it('should return 12 AI topics', () => {
+    const topics = getTopics('ai');
+    expect(topics).toHaveLength(12);
+  });
+
+  it('should filter AI questions by topic "rag"', () => {
+    const rag = getQuestionsByTopic('ai', 'rag');
+    expect(rag.length).toBeGreaterThan(0);
+    expect(rag.every(q => q.topic === 'rag' && q.block === 'ai')).toBe(true);
+  });
+
   it('should filter by topic', () => {
     const modeling = getQuestionsByTopic('sa', 'modeling');
     expect(modeling.length).toBeGreaterThan(0);
